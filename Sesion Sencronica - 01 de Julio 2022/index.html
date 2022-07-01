@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CDN de taildwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CDN flowbite -->
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+    <!-- Configuracion taildwild -->
+    <script src="./scripts/tailwind.js"></script>
+    <title>Movies App</title>
+</head>
+<body class="lg:mb-0 bg-primary mb-20">
+    <!-- Header -->
+    <nav class="lg:px-8 lg:justify-between lg:flex lg:py-6 lg:items-center text-secondary">
+        <div class="lg:flex-row sm:gap-6 flex items-center flex-col mt-4 gap-4">
+            <img class="lg:w-44 sm:w-36 w-32" src="./assets/prime-video.png" alt="amazon prime logo">
+            <ul class="lg:text-2xl lg:px-2 sm:px-6 sm:text-xl flex justify-between w-full px-4 text-lg">
+                <li class="font-bold text-white px-4 border-b-2"><a href="#">Inicio</a></li>
+                <li class="px-4"><a href="#">Series</a></li>
+                <li class="px-4"><a href="#">Películas</a></li>
+                <li class="px-4"><a href="#">Infantil</a></li>
+            </ul>
+        </div>
+
+        <div class="lg:gap-6 lg:text-2xl lg:block lg:flex hidden">
+            <div class="flex items-center relative">
+                <svg class="xl:absolute left-1.5 text-white w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input class="xl:block lg:hidden focus:ring-0 focus:border-white hover:border-white border-secondary bg-transparent text-xl pl-10" type="text" placeholder="Buscar">
+            </div>
+
+            <div class="flex items-center gap-2">
+                <svg class="text-active w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <p>Jose Garcia</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slider -->
+    <div id="slider"></div>
+
+    <template id="temSlider">
+        <div id="indicators-carousel" class="relative" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div id="wrapper" class="overflow-hidden relative h-28 sm:h-56 lg:72 xl:h-80 2xl:h-96">
+            </div>
+    
+            <!-- Slider indicators -->
+            <div id="indicators" class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2"></div>
+            <!-- Slider controls -->
+            <button type="button" class="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev="">
+                <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span class="hidden">Previous</span>
+                </span>
+            </button>
+            <button type="button" class="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next="">
+                <span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <span class="hidden">Next</span>
+                </span>
+            </button>
+        </div>
+    </template>
+    
+
+    <!-- Peliculas -->
+    <div id="peliculas"></div>
+
+    <template id="temPeliculas">
+        <section class="lg:mt-6 lg:pl-8 sm:pl-6 text-secondary mt-3 pl-4">
+            <!-- Titulo -->
+            <div class="lg:mb-6 flex items-center mb-2">
+                <h2 class="lg:text-3xl sm:text-xl font-bold tracking-wide">Amazon Originals y Exclusivos</h2>
+                <a href="#">
+                    <svg class="lg:w-10 lg:h-10 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+    
+            <!-- Carrusel -->
+            <div id="posters" class="flex gap-4 overflow-x-auto"></div>
+        </section>
+    </template>
+    
+
+    <!-- Navbar Controls -->
+    <nav class="lg:hidden fixed bottom-0 inset-x-0  bg-black text-secondary flex justify-between px-4 py-2">
+        <a class="flex flex-col items-center text-active" href="#">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <h3>Inicio</h3>
+        </a>
+        <a class="flex flex-col items-center" href="#">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <h3>Encontrar</h3>
+        </a>
+        <a class="flex flex-col items-center" href="#">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <h3>Descargas</h3>
+        </a>
+        <a class="flex flex-col items-center" href="#">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            <h3>Mi espacio</h3>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="lg:block hidden text-secondary my-7">
+        <img class="w-40 block m-auto" src="./assets/prime-video.png" alt="amazon prime logo">
+        <div class="flex justify-center gap-6 mt-5 text-active font-semibold">
+            <a href="#">Términos y Aviso de privacidad</a>
+            <a href="#">Envíanos tus comentarios</a>
+            <a href="#">Ayuda</a>
+            <p class="text-secondary font-normal ">©1996-2022, Amazon.com, Inc. o sus filiales</p>
+        </div>
+    </footer>
+    <!-- script -->
+    <script src="./scripts/main.js" type="module" ></script>
+    <!-- CDN flowbite -->
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+</body>
+</html>
