@@ -11,8 +11,8 @@ export const mostrarPeliculas = ( cont, movies = [], template, name = '' ) => {
         const { id, poster_path, title } = movie;
         if (poster_path ) {
             posters.innerHTML += `
-            <a id=${id} class="shrink-0" href="./pages/detalle.html">
-                <img class="lg:w-96 sm:w-60 w-44 rounded " src="${img_path + poster_path}" alt="${title}">
+            <a  class="shrink-0" >
+                <img id=${id} class="lg:w-96 sm:w-60 w-44 rounded poster" src="${img_path + poster_path}" alt="${title}">
             </a>
             `;
         }

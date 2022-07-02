@@ -18,13 +18,13 @@
         </a>
         <div class="lg:flex">
             <div class="lg:relative lg:left-20 lg:blur-2xl bg-primary lg:block lg:h-screen lg:w-2/5 hidden"></div>
-            <img class="lg:w-3/5 lg:h-screen md:h-[90vh] md:object-cover md:object-left" src="../assets/poster_1.jpg" alt="poster">
+            <img id="detImg" class="lg:w-3/5 lg:h-screen md:h-[90vh] md:object-cover md:object-left" src="../assets/poster_1.jpg" alt="poster">
         </div>
     </header>
 
     <!-- description -->
     <main class="lg:w-2/5 lg:absolute lg:top-5 text-secondary px-4 mt-2">
-        <h1 class="lg:text-3xl text-xl font-bold">The Contractor (2022)</h1>
+        <h1 id="detTitle" class="lg:text-3xl text-xl font-bold">The Contractor (2022)</h1>
         <p class="lg:text-lg mt-2">10/3/2022 (SG) - Acción, Suspense - 1h 43m</p>
         <div class="relative">
             <svg class="lg:top-6 absolute top-5 left-3 w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -43,7 +43,7 @@
                 <svg class="m-auto w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             </button>
         </div>
-        <p class="lg:text-lg mt-4 text-justify ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, sit ea. Sunt, itaque saepe consectetur maiores animi error praesentium aliquam deserunt voluptatibus ducimus eum beatae aperiam assumenda facere soluta amet.</p>
+        <p id="detOverview" class="lg:text-lg mt-4 text-justify ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, sit ea. Sunt, itaque saepe consectetur maiores animi error praesentium aliquam deserunt voluptatibus ducimus eum beatae aperiam assumenda facere soluta amet.</p>
     </main>
 
     <p class="lg:block hidden w-1/3 absolute left-4 bottom-4 text-secondary" >Al hacer clic en reproducir, aceptas nuestros <a class="text-active" href="#">Términos de uso</a></p>
@@ -68,5 +68,8 @@
             <h3>Mi espacio</h3>
         </a>
     </nav>
+
+    <!-- scrript -->
+    <script src="../scripts/detalle.js" type="module"></script>
 </body>
 </html>

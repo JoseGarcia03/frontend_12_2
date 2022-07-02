@@ -33,6 +33,14 @@ const funcionarSlider = async( url ) => {
     };
 }
 
+document.addEventListener('click', ({ target }) => {
+    if (target.classList.contains('poster')) {
+        localStorage.setItem('id', target.id );
+
+        window.location.href = './pages/detalle.html';
+    }
+} );
+
 
 const mostrarSecciones = async( url, name ) => {
     try {
