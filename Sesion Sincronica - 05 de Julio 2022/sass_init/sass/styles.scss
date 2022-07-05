@@ -1,0 +1,30 @@
+
+// Colores principales
+$color__primary: #F9E900;
+$color__secondary: #F98A4F;
+$color__text: #000;
+
+// Colores oscuros
+$color__primary--dark: #000103;
+$color__secondary--dark: #515052;
+$color__text--dark: #FFFFFA;
+
+.theme {
+    color: $color__text;
+    background-color: $color__secondary;
+}
+
+.theme--dark {
+    color: $color__text--dark;
+    background-color: $color__secondary--dark;
+}
+
+// @mixin fondo {
+//     background-color: $primary-color;
+//     width: 90%;
+//     margin: 0 auto;
+// }
+
+// body {
+//    @include fondo();
+// }
