@@ -1,3 +1,6 @@
+import { deletee, get, post, put } from "../helpers/crud.js";
+import mostrar from "../modules/mostar_tabla.js";
+
 // Variables
 const form_cita = document.getElementById('form_cita');
 const name = document.getElementById('name');
@@ -10,37 +13,26 @@ const btn_skip = document.getElementById('btn_skip');
 
 const tbody_citas = document.getElementById('tbody_citas');
 
+const url = "http://localhost:3000/citas/"
+
 // Mostrar citas actuales
 document.addEventListener( "DOMContentLoaded", async() => {
     try {
-
-        const resp = await fetch( "http://localhost:3000/citas" );
-        const citas = await resp.json();
-
+        const citas = await get( url );
         if (citas.length !== 0 ) {
-            citas.forEach( cita => {
-                const { name, date, email, desc, id } = cita;
-                tbody_citas.innerHTML += `
-                <tr>
-                    <th scope="row">${ name }</th>
-                    <td>${ date }</td>
-                    <td>${ email }</td>
-                    <td>${ desc }</td>
-                    <td>
-                        <button id="${ id }" class="btn btn-warning editar">Editar</button>
-                        <button id="${ id }" class="btn btn-danger cancelar">Cancelar cita</button>
-                    </td>
-                </tr>`
-            } );
+            mostrar( citas, tbody_citas )
         }
     } catch ( err ) {
-        alert( "Servidor no responde, intente mas tarde" );
         console.log( err );
+        alert( "Servidor no responde, intente mas tarde" );
     }
 } );
 
 // Agregar nueva cita
-form_cita.addEventListener( 'submit', async()=> {
+form_cita.addEventListener( 'submit', async( e )=> {
+
+    e.preventDefault();
+    
     const cita = {
         name: name.value,
         email: email.value,
@@ -49,30 +41,16 @@ form_cita.addEventListener( 'submit', async()=> {
         id: crypto.randomUUID()
     };
 
-    try {
-        await fetch( "http://localhost:3000/citas", {
-            method: "POST",
-            body: JSON.stringify( cita ),
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            } 
-        });
+    post( url, cita );
 
-        window.location.reload();
-
-    } catch ( err ) {
-        alert( "No se pudo agendar la cita, intente mas tarde" );
-        console.log( err );
-    };
 } );
 
 // Acciónes
 document.addEventListener( "click", async({ target }) => {
     // Acción editar cita
     if (target.classList.contains("editar")) {
-        try {
-            const resp = await fetch( `http://localhost:3000/citas/${ target.id }`);
-            const cita = await resp.json();
+        try { 
+            const cita = await get( url + target.id );
 
             const { name:nombre, email:correo, date:fecha, desc:descripcion } = cita;
             name.value = nombre;
@@ -96,16 +74,8 @@ document.addEventListener( "click", async({ target }) => {
     if (target.classList.contains("cancelar")) {
 
         if (window.confirm( "Seguro que desea cancelar la cita, esta accion no se puede deshacer" )) {
-
-            try {
-                await fetch( `http://localhost:3000/citas/${ target.id }`, { method: "DELETE" } );
-            } catch ( err ) {
-                alert( "Servidor no responde, intente mas tarde" );
-                console.log( err );
-            };
-
+            deletee( url + sessionStorage.getItem("id") );
         }
-
     }
 } );
 
@@ -115,24 +85,11 @@ btn_save.addEventListener( "click", async() => {
         name: name.value,
         email: email.value,
         date: date.value,
-        desc: desc.value,
+        desc: desc.value
     };
 
-    try {
-        await fetch( `http://localhost:3000/citas/${ sessionStorage.getItem( "id" ) }`, {
-            method: "PUT",
-            body: JSON.stringify( cita ),
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-        } 
-        });
+    put( url + sessionStorage.getItem("id"), cita );
 
-        window.location.reload();
-
-    } catch ( err ) {
-        alert( "No se pudo agendar la cita, intente mas tarde" );
-        console.log( err );
-    };
 } );
 
 // Cancelar edicion
