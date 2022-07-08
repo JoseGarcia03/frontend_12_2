@@ -15,9 +15,38 @@
             Product App
         </a>
     </nav>
+
+    <main id="container" class="container">
+        <!-- APLICACION -->
+        <div id="app" class="row pt-5">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Agregar un producto</h4>
+                    </div>
+                    <form id="form_product" class="card-body">
+                        <div class="form-group mb-3">
+                            <input class="form-control" type="text" id="name" placeholder="Nombre del Producto">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input class="form-control" type="number" id="price" placeholder="Precio del producto">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input class="form-control" type="number" id="year" placeholder="Año de caducidad">
+                        </div>
+                        <input type="submit" class="btn btn-primary w-100" value="Agregar">
+                    </form>
+                </div>
+            </div>
+
+            <div id="product_list" class="col-8">
+                
+            </div>
+        </div>
+    </main>
     
-
-
+    <!-- CDN AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- SCRIPTS -->
     <script type="module" src="./main.js"></script>
 </body>
