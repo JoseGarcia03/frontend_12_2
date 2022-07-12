@@ -1,13 +1,10 @@
 const path = require("path");
 
-// const nodeExternals = require("webpack-node-externals");
 const html_webpack_plugin = require("html-webpack-plugin");
 const mini_css_extract_plugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    mode: "none",
-    // target: "node",
-    // externals: [nodeExternals()],
+    target: "web",
     entry: {
         index: ["@babel/polyfill", "./src/app/index.js"],
         home: ["@babel/polyfill", "./src/app/scripts/home.js"]
@@ -27,8 +24,12 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                loader: "babel-loader",
-                exclude: "/node_modules/"
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                      presets: ['@babel/preset-env']
+                    }
+                },
             }
         ]
     },
