@@ -6,4 +6,6 @@ export const Container = styled.div`
     margin: 0 auto;
     display: ${ props => props.flex ? 'flex' : 'inherit' };
     align-items: ${ props => props.itemCenter ? 'center' : 'inherit' };
+    gap: ${ props => props.gap };
+    flex-wrap: ${ props => props.wrap ? 'wrap' : 'nowarp'};
 `
