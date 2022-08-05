@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
+import { loginGoogle, LoginWithEmail } from "../../Redux/Actions/userAction";
 
 const LoginForm = () => {
     const [formValues, handleInputChange, reset] = useForm({
@@ -7,12 +9,16 @@ const LoginForm = () => {
         password: ''
     })
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(formValues);
-
+        dispatch(LoginWithEmail(formValues.email, formValues.password))
         reset()
+    }
+
+    const handleGoogle = () => {
+        dispatch(loginGoogle())
     }
 
     return (
@@ -21,7 +27,7 @@ const LoginForm = () => {
             <p className="text-slate-500">Hi, Welcome back 👋</p>
 
             <div className="my-5">
-                <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150" onClick={handleGoogle}>
                     <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-6 h-6" alt="" /> <span>Login with Google</span>
                 </button>
             </div>

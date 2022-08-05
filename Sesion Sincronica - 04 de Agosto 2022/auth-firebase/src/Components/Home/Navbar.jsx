@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 
+import { getAuth, signOut } from "firebase/auth";
+
 
 const Navbar = () => {
+
+    const logOut = () => {
+        const auth = getAuth();
+        signOut(auth);
+    }
+
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative bg-white">
             <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:space-x-10">
@@ -25,6 +33,7 @@ const Navbar = () => {
                 <div>
                     <Link
                     to='#'
+                    onClick={logOut}
                     className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                     >
                     Cerrar Sesión

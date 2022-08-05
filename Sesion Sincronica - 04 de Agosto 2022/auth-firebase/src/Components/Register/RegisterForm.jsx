@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
+import { registerWithEmail } from "../../Redux/Actions/userAction";
 
 
 const RegisterForm = () => {
@@ -9,11 +11,11 @@ const RegisterForm = () => {
         password: ''
     })
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(formValues);
-
+        dispatch(registerWithEmail(formValues.email, formValues.password, formValues.name));
         reset()
     }
 
