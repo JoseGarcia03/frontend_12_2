@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteDate, readDate } from '../../Redux/Actions/citasAction';
 
-const Table = () => {
+const Table = ({ setEdit }) => {
+  const { citas } = useSelector( state => state )
+
+  const dispatch = useDispatch();
+
+  const actionDelete = (email) => {
+    dispatch( deleteDate(email) )
+  }
+
+  const actionEdit = (email) => {
+    setEdit( email )
+  }
+
+  useEffect(() => {
+    dispatch(readDate())
+  }, [])
+   
+
   return (
     <div className="overflow-x-auto">
   <table className="table w-full">
@@ -16,18 +35,21 @@ const Table = () => {
       </tr>
     </thead>
     <tbody>
-      {/* <!-- row 1 --> */}
-      <tr>
-        <th>Jose Garcia</th>
-        <td>jose@gmail.com</td>
-        <td>3138987572</td>
-        <td>22-08-2022</td>
-        <td>Dolor de cabeza</td>
-        <th>
-            <button className="btn btn-outline btn-warning">Edit</button>
-            <button className="btn btn-outline btn-error">Delete</button>
-        </th>
-      </tr>
+    {
+      citas.map( ({ name, email, date, phone, symptoms}, idx) => (
+        <tr key={ idx }>
+          <th>{ name }</th>
+          <td>{ email }</td>
+          <td>{ phone }</td>
+          <td>{ date }</td>
+          <td>{ symptoms }</td>
+          <th>
+              <button onClick={() => actionEdit(email) } className="btn btn-outline btn-warning">Edit</button>
+              <button onClick={() => actionDelete(email) } className="btn btn-outline btn-error">Delete</button>
+          </th>
+        </tr>
+      ))
+    }  
     </tbody>
   </table>
 </div>
